@@ -8,22 +8,33 @@ const { NotImplementedError } = require('../extensions/index.js');
   arrayChain: [],
 
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.arrayChain.length;
   },
 
   addLink(value) {
-    this.arrayChain.push(value);
+    const link = value !== undefined ? value : '';
+    this.arrayChain.push(link);
+    return this;
   },
 
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) {
+    if (
+      position < 1 ||
+      typeof position !== 'number' ||
+      position > this.arrayChain.length
+    ) {
+      this.arrayChain = [];
+      throw new Error("You can't remove incorrect link!");
+    } else {
+      this.arrayChain.splice(position - 1, 1);
+      return this;
+    }
+
   },
 
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.arrayChain.reverse();
+    return this;
   },
 
   finishChain() {
@@ -31,6 +42,7 @@ const { NotImplementedError } = require('../extensions/index.js');
     for (let i = 0; i < this.arrayChain.length; i++) {
       resultArray.push(`( ${this.arrayChain[i]} )`);
     }
+    this.arrayChain = [];
     return resultArray.join('~~');
   }
 };
