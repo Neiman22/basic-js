@@ -22,20 +22,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
- function getDNSStats(domains) {
-  const dnsStats = {};
-
-  for (let i = 0; i < domains.length; i++) {
-    const domain = domains[i].split('.').reverse();
-
+ function getDNSStats(array) {
+  let result = {};
+  
+  for (let i = 0; i < array.length; i++) {
+    const subArr = array[i].split('.').reverse();
     let dns = '';
-    for (let j = 0; j < domain.length; j++) {
-      dns += `.${domain[j]}`;
-      dnsStats[dns] = (dnsStats[dns] || 0) + 1;
+    for (let j = 0; j < subArr.length; j++) {
+      dns += `.${subArr[j]}`;
+      if(result[dns]) {
+        result[dns] += 1;
+      } else { 
+        result[dns] = 1;
+      }
     }
   }
-
-  return dnsStats;
+  return result;
 }
 
 module.exports = {
