@@ -19,7 +19,11 @@ const { NotImplementedError } = require('../extensions/index.js');
 
   if (arr.length !== 6) return false;
 
-  return arr.every(element => element.length === 2 && !isNaN(parseInt(element, 16)));
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].length !== 2 || isNaN(parseInt(arr[i], 16))) return false;
+  };
+
+  return true;
 }
 module.exports = {
   isMAC48Address
