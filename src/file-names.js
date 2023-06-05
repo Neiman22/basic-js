@@ -18,23 +18,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  function renameFiles(array) {
   const subObj = {};
   const subArr = [];
-  const newSubObj = (name, count) => `${name}(${count})`;
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] in subObj) {
-      if (subObj[array[i]] === 1) {
-        subObj[array[i]] += 1;
-        let newName = newSubObj(array[i], 1);
+  for (let name of array) {
+    if (name in subObj) {
+        let count = subObj[name];
+        const newName = `${name}(${count})`;
+        subObj[name] += 1;
         subObj[newName] = 1;
         subArr.push(newName);
-      } else {
-        subObj[array[i]] += 1;
-        let newName = newSubObj(array[i], subObj[array[i]] - 1);
-        subArr.push(newName);
-      }
     } else {
-      subObj[array[i]] = 1;
-      subArr.push(array[i]);
+      subObj[name] = 1;
+      subArr.push(name);
     }
   }
   return subArr;
