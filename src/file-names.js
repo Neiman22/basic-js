@@ -34,12 +34,6 @@ const { NotImplementedError } = require('../extensions/index.js');
   return subArr;
 }
 
-// Example usage
-const names = ["file", "file", "image", "file(1)", "file"];
-const renamedNames = renameFiles(names);
-console.log(renamedNames); // ["file", "file(1)", "image", "file(1)(1)", "file(2)"]
-
-
 module.exports = {
   renameFiles
 };
